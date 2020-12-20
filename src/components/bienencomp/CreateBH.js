@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { bienenhausAnlegen } from '../../store/actions/bienenhausActions';
 
 class createBH extends Component {
     state = {
@@ -14,7 +16,11 @@ class createBH extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault(); // Um ein Pagereload zu verhindern
+        console.log('BREAKPOINT createBH props')
+        console.log(this.props)
+        console.log('BREAKPOINT createBH state')
         console.log(this.state)
+        this.props.bienenhausAnlegen(this.state)
     }
 
     render() {
@@ -40,4 +46,10 @@ class createBH extends Component {
     }
 }
 
-export default createBH
+const mapDispatchToProps = (dispatch) => {
+    return {
+        bienenhausAnlegen: (bienenhaus) => dispatch(bienenhausAnlegen(bienenhaus))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(createBH)
