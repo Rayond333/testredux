@@ -7,6 +7,8 @@ import SignIn from './components/auth/SignIn';
 import Register from './components/auth/Register';
 import createBH from './components/bienencomp/CreateBH';
 import Map from './components/map/map';
+import BienenhausDetails from './components/bienencomp/BienenhausDetails';
+import OverviewBienenhaus from './components/bienencomp/overviewBienenhaus';
 
 class App extends Component {
   render() {
@@ -18,6 +20,8 @@ class App extends Component {
             {/* Die Pfade hier müssen mit den NavLinks in SignedInLinks übereinstimmen */}
             <Route exact path='/' component={Dashboard} />
             <Route path='/stockkarte/:id' component={stockkarte} />
+            <Route path='/bienenhaus/:id' component={BienenhausDetails} />
+            <Route path='/overviewbh' component={OverviewBienenhaus} />
             <Route path='/signin' component={SignIn} />
             <Route path='/register' component={Register} />
             <Route path='/createbh' component={createBH} />

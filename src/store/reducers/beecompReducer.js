@@ -1,17 +1,16 @@
-const initState = {
-    bienenhaeuser: [
-        {id: '1', name: 'Neues Bienenhaus', location: 'Frankfurt'},
-        {id: '2', name: 'Mein Bienenhaus', location: 'Darmstadt'},
-        {id: '3', name: 'Kleines Bienenhaus', location: 'Hanau'}
-    ]
-}
+import * as actions from '../actions/actionTypes';
 
-const beecompReducer = (state = initState, action) => {
+const beecompReducer = (state = [], action) => {
     switch (action.type) {
-        case 'CREATE_BIENENHAUS': 
-            console.log('created bienenhaus', action.bienenhaus)
+        case actions.CREATE_BIENENHAUS: 
+            console.log('created bienenhaus', action)
+            return state;
+        case actions.CREATE_ERROR:
+            console.log('create project error', action);
+            return state;
+        default:
+            return state;
     }
-    return state
 }
 
 export default beecompReducer
