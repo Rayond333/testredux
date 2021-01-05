@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './components/map/map.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -11,6 +12,7 @@ import { reduxFirestore, createFirestoreInstance, getFirestore } from 'redux-fir
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
 import firebase from 'firebase';
+import { MapProvider } from "./components/map/mapHook";
 
 const store = createStore(
     rootReducer,
@@ -37,7 +39,9 @@ const rffProps = {
 ReactDOM.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rffProps}>
-            <App />
+            <MapProvider>
+                <App />
+            </MapProvider>
         </ReactReduxFirebaseProvider>
     </Provider>,
     document.getElementById('root'));
