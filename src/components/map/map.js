@@ -20,21 +20,6 @@ function Map(state) {
         lon = position.coords.longitude;
     });
 
-    navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
-        enableHighAccuracy: true
-    })
-
-    function successLocation(position) {
-        console.log(position)
-     
-    }
-
-    function errorLocation() {
-        
-    }
-
-    
-
     const [viewport, setViewport] = React.useState({
         //Standartsicht Ffm
         latitude: 50.110644,
@@ -62,8 +47,6 @@ function Map(state) {
                     onClick={x => { x.srcEvent.which === 1 && mapDispatch({ type: "ADD_MARKER", payload: { marker: x.lngLat } }) }}
                     //Für Zoom und Bewegen
                     onViewportChange={(viewport) => setViewport(viewport)}
-
-
 
                 >
                     <Marker longitude={8.6867968} latitude={50.085888} >
