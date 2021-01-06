@@ -2,12 +2,12 @@ import authReducer from './authReducer';
 import beecompReducer from './beecompReducer';
 import { combineReducers } from 'redux';
 import { firestoreReducer } from 'redux-firestore';
-import mapReducer from './mapReducer';
+// import mapReducer from './mapReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer,
     bienenhaus: beecompReducer,
-    map: mapReducer,
+    // map: mapReducer,
     firestore: firestoreReducer
 });
 

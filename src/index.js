@@ -12,7 +12,6 @@ import { reduxFirestore, createFirestoreInstance, getFirestore } from 'redux-fir
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig';
 import firebase from 'firebase';
-import { MapProvider } from "./components/map/mapHook";
 
 const store = createStore(
     rootReducer,
@@ -39,9 +38,7 @@ const rffProps = {
 ReactDOM.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rffProps}>
-            <MapProvider>
                 <App />
-            </MapProvider>
         </ReactReduxFirebaseProvider>
     </Provider>,
     document.getElementById('root'));

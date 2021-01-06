@@ -4,13 +4,15 @@ import './map.css';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { createMarker } from '../../store/actions/mapActions';
-import { useDispatchMap } from "./mapHook";
-import { Markers } from "./markers";
+import CreatePopup from './CreatePopup';
+
+
+function click() {
+    console.log("du hast mich geklickt")
+}
 
 function Map(state) {
 
-    const mapDispatch = useDispatchMap();
     var lat;
     var lon;
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -32,9 +34,9 @@ function Map(state) {
     // console.log(state)
     const geoData = state.geoData;
 
+
     return (
         <>
-
             <div className="Map">
 
                 <ReactMapGl
@@ -43,19 +45,13 @@ function Map(state) {
                     mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                     //Syle
                     mapStyle="mapbox://styles/rayond333/ckjit47x0510119qji1of3f3w"
-                    //onClick Event, um Marker auf Karte hinzuzufügen
-                    onClick={x => { x.srcEvent.which === 1 && mapDispatch({ type: "ADD_MARKER", payload: { marker: x.lngLat } }) }}
                     //Für Zoom und Bewegen
                     onViewportChange={(viewport) => setViewport(viewport)}
 
                 >
-                    <Marker longitude={8.6867968} latitude={50.085888} >
-                        <button className="marker-btn">
-                            {/* <img src=" https://img.icons8.com/color/48/000000/marker.png" /> */}
-                            <img src="/beehive.svg" alt="Beehive Icon" />
-                        </button>
-                    </Marker>
-                    {/* <button className="add-btn">Add Bienenhaus</button> */}
+
+                    <button className="add-btn" onClick={click}>Add Bienenhaus</button>
+
                     {/* Hier werden die gespeicherten Marker aus Firebase gesetzt */}
                     {geoData && geoData.map(geoData => {
                         return (
@@ -67,28 +63,23 @@ function Map(state) {
                             </Marker>
                         )
                     })}
-                    <Markers />
+
                 </ReactMapGl>
             </div>
+            <CreatePopup />
         </>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        geoData: state.firestore.ordered.Geo
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createMarker: (geoData) => dispatch(createMarker(geoData))
+        geoData: state.firestore.ordered.Bienenhäuser
     }
 }
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'Geo' }
+        { collection: 'Bienenhäuser' }
     ])
 )(Map)
